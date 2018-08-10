@@ -1,0 +1,68 @@
+oshliaer<!doctype html>
+<head>
+  <meta name="author" content="puravidaapps.com">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="materialize.min.css"  media="screen,projection"/>
+
+  <title>Table Layout</title>
+</head>
+
+<body>
+  <div id="myTable"></div>
+  <script>
+    // if you have commas inside your text, feel free to use another delimiter, for example |
+    var delimiter = ",";
+
+    // get the table to display from the window.AppInventor object and split at new line
+    var urlArray = window.AppInventor.getWebViewString().split("\n");
+    //var urlArray = location.search.slice(1).split("/n");
+
+    var doc = document;
+    var fragment = doc.createDocumentFragment();
+    var thead = doc.createElement("thead");
+    var tr = doc.createElement("tr");
+
+    // split at delimiter
+    var rowArray = urlArray[0].split(delimiter);
+
+    addRow(thead, "th");
+    fragment.appendChild(thead);
+
+    var tbody = doc.createElement("tbody");
+    for(i=1;i<urlArray.length;i++){
+      var tr = doc.createElement("tr");
+
+      // split at delimiter
+      var rowArray = urlArray[i].split(delimiter);
+
+      tr.addEventListener ("click", function () {
+        // return index (add 1 because first row is the header row)
+        //window.document.title = this.rowIndex + 1;
+        window.AppInventor.setWebViewString(this.rowIndex + 1);
+      });
+
+      addRow(tbody, "td");
+    }
+    fragment.appendChild(tbody);
+    var table = doc.createElement("table");
+    table.appendChild(fragment);
+    doc.getElementById("myTable").appendChild(table);
+
+    // http://stackoverflow.com/a/9236195/1545993
+    doc.getElementById("myTable").getElementsByTagName('table')[0].className = "striped";
+
+
+    function addRow(dom, tag) {
+      for(j=0;j<rowArray.length;j++){
+        var el = doc.createElement(tag);
+        el.innerHTML = rowArray[j];
+        tr.appendChild(el);
+        dom.appendChild(tr);
+      }
+    }
+  </script>
+</body>
+</html>
