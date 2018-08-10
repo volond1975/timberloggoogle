@@ -1,4 +1,4 @@
-oshliaer<!doctype html>
+<!doctype html>
 <head>
   <meta name="author" content="puravidaapps.com">
   <meta charset="utf-8">
@@ -13,10 +13,12 @@ oshliaer<!doctype html>
 <body>
   <div id="myTable"></div>
   <script>
+  // Источник: https://puravidaapps.com/table.php
     // if you have commas inside your text, feel free to use another delimiter, for example |
     var delimiter = ",";
 
     // get the table to display from the window.AppInventor object and split at new line
+    
     var urlArray = window.AppInventor.getWebViewString().split("\n");
     //var urlArray = location.search.slice(1).split("/n");
 
@@ -40,8 +42,8 @@ oshliaer<!doctype html>
 
       tr.addEventListener ("click", function () {
         // return index (add 1 because first row is the header row)
-        //window.document.title = this.rowIndex + 1;
-        window.AppInventor.setWebViewString(this.rowIndex + 1);
+        window.document.title = this.rowIndex + 1;
+        //window.AppInventor.setWebViewString(this.rowIndex + 1);
       });
 
       addRow(tbody, "td");
